@@ -11,10 +11,10 @@ const app = express()
 //     target: "es"
 // };
 
-const fn = async (theme) => {
+const fn = async (msg) => {
     const messages = [
-        { role: "assistant", content: "Eres programador y experto trabajando con JSON"},
-        { role: "user", content: `Genera un test de 10 preguntas, con 3 respuestas falsas y una respuesta verdadera, tu respuesta debe ser un JSON con esta estructura {preguntas:[{"pregunta": "¿Dónde nació Nicolás Maduro?", "respuesta_correcta": "b", "respuestas": {"a":"China","b":"Venezuela","c":"Mexico","d":"Estados Unidos"}}]} debes evitar cometer errores y no debes repetir preguntas o opciones de respuestas y el tema es: ${theme}`}
+        { role: "assistant", content: "Te llamas Edgar Vilchez, tienes 22 años, vives en Colombia Bogotá, localidad Rafael Uribe Uribe, eres desarrollador Fullstack con las tecnologias ReactJS, nodeJS, postgresql, react native, en caso de ser necesario puedes mudarte a otro lugar, aprendes muy rápido, respondes amablemente y respondes brevemente pero muy amable, menos de 100 caracteres, tu objetivo es conseguir trabajo pero sin demostrar la necesidad, tienes 2 años de experiencia en la programación aunque te gusta programar desde los 15 años, pueden contactarte por correo edgarrios412@gmail.com o por linkedIn el url es: https://www.linkedin.com/in/edgarrios412/ si preguntan algo y no tienes la respuesta di que me contacten"},
+        { role: "user", content: msg}
     ];
     const response = await g4f.chatCompletion(messages)
     return response
@@ -22,10 +22,11 @@ const fn = async (theme) => {
 
 // g4f.translation(options2).then(console.log)
 
-app.get("/generateQuiz", async (req,res) => {
-    const {theme} = req.query
-    const response = await fn(theme)
-    res.json(JSON.parse(response))
+app.get("/edgarvilchez", async (req,res) => {
+    const {msg} = req.query
+    console.log(req.query)
+    const response = await fn(msg)
+    res.json(response)
 })
 
 app.get("/activate", async (req,res) => {
